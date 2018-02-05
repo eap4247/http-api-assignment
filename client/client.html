@@ -6,7 +6,57 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
+    let page = null;
+    let type = null;
 
+    //handle xhr response
+    const handleResponse = (xhr) => {
+        const acceptedType = xhr.getResponseHeader("content-type");
+        const content = document.querySelector("#content");
+        
+        const h1 = document.createElement("h1");
+        const p = document.createElement("p");
+        
+        //if JSON response
+        if(acceptedType === "application/json"){
+            const obj = JSON.parse(xhr.repsonse);
+            h1.textContent = obj.id;
+            p.textContent = "Message: " + obj.message;
+        }
+            
+        //append the created elements to the content.
+        content.appendChild(h1);
+        content.appendChild(p);
+    }
+
+    //send xhr request
+    const sendAjax = (pageValue, typeValue) => {
+        const xhr = new XMLHttpRequest();
+    
+        xhr.open("GET", (pageValue.toLowerCase));
+        xhr.setRequestHeader ("Accept", typeValue);
+        xhr.onload = () => handleResponse(xhr);
+        
+        xhr.send();
+    }
+
+    const init = () => {
+        const sendButton = document.querySelector("#send");
+        
+        page = document.querySelector("#page");
+        type = document.querySelector("#type");
+        
+        const send = () => {
+            let pageValue = page.options[page.selectedIndex].text;
+            let typeValue = type.options[type.selectedIndex].text;
+            
+            sendAjax(pageValue, typeValue);
+        }
+        
+        sendButton.addEventListener("click", send);
+    }
+    
+    window.onload = init;
   </script>
 </head>
 <body>

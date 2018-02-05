@@ -1,0 +1,26 @@
+{
+  "name": "http-api-assignment",
+  "version": "1.0.0",
+  "description": "http api assignment ",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eap4247/http-api-assignment.git"
+  },
+  "author": "Elvis Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eap4247/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/eap4247/http-api-assignment#readme",
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
+}
